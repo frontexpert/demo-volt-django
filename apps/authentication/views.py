@@ -12,6 +12,7 @@ import sys
 import traceback
 from django.core.mail import get_connection, EmailMultiAlternatives
 from apps.home.models import User
+from apps.home.views import index
 
 def siginin(request):
     return render(request, "accounts/login.html")
@@ -19,19 +20,20 @@ def siginin(request):
 def login_user(request):
     usermail = request.POST.get('usermail')
     userpass = request.POST.get('userpass')
-    remember_me = int(request.POST.get('rememberme'))
-
+    remember_me = request.POST.get('rememberme')
     captcha = request.POST.get('g-recaptcha-response')
-    print("captcha::::", captcha)
-    print("remember_me::::", remember_me)
+    print("captcha:::", captcha)
+    print("remember_me:::", remember_me)
+
     auth_res = authenticate(request, correo_personal=usermail, password=userpass)
     if auth_res is not None:
         login(request, auth_res)
         if remember_me == 0:
             request.session.set_expiry(0)
-        return JsonResponse({'status': 'ok'})
+        # return JsonResponse({'status': 'ok'})
+        return redirect(index)
     else:
-        return JsonResponse({'status': 'fail'})
+        return redirect(siginin)
 
 def register_user(request):
     username = request.POST.get("username")

@@ -29,7 +29,7 @@
                                     {% endif %}                                     
                                 </p> 
                             </div>
-                            <form method="post" action="" class="mt-4">
+                            <form method="post" action="{% url 'login' %}" class="mt-4">
                                 
                                 {% csrf_token %}
 
@@ -40,7 +40,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <span class="fas fa-user-circle"></span>
                                         </span>
-                                        <input type="text" class="form-control" name="usermail" placeholder="e.x. abc@gmail.com">
+                                        <input type="text" class="form-control" name="usermail" placeholder="e.x. abc@gmail.com" required>
                                     </div>  
                                 </div>
                                 <!-- End of Form -->
@@ -52,7 +52,7 @@
                                             <span class="input-group-text" id="basic-addon2">
                                                 <span class="fas fa-unlock-alt"></span>
                                             </span>
-                                            <input type="password" class="form-control" name="userpass">
+                                            <input type="password" class="form-control" name="userpass" required>
                                         </div>  
                                     </div>
                                     <!-- End of Form -->
@@ -66,9 +66,9 @@
                                         <div><a href="{% url 'forgot password' %}" class="small text-right">Lost password?</a></div>
                                     </div>
                                 </div>
-                                <div class="g-recaptcha" data-sitekey="6LcEiB0eAAAAADl87HDLt9eA6vU8kq6pfbwrYZXX"></div>
+                                <div class="g-recaptcha" data-sitekey="6LdWDx0eAAAAAP69EEw4q4EfTn47EFktb8jUC5VM"></div>
                                 <div class="d-grid">
-                                    <button type="button" id="login_btn" class="btn btn-gray-800">Sign IN</button>
+                                    <button type="submit" class="btn btn-gray-800">Sign IN</button>
                                 </div>
                             </form>
                             <br />
