@@ -1,0 +1,161 @@
+{% extends "layouts/base-fullscreen.html" %}
+
+{% block title %} Sign UP {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <main>
+        <section class="vh-lg-100 mt-5 mt-lg-0 bg-soft d-flex align-items-center">
+            <div class="container">
+                <p class="text-center">
+                    Open-source Django Dashboard
+                </p>
+                <div class="row justify-content-center form-bg-image" data-background-lg="/static/assets/img/illustrations/signin.svg">
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+                            <div class="text-center text-md-center mb-4 mt-md-0">
+                                <h1 class="mb-0 h3">
+                                    Django Volt - Sign UP
+                                </h1>
+                                <br />
+                                <p id="msgbox">
+                                    {% if msg %}
+                                        {{ msg | safe }}
+                                    {% else %}
+                                        Add your credentials
+                                    {% endif %}                                     
+                                </p> 
+                            </div>
+                            <form method="post" action="" class="mt-4">
+
+                                <div class="form-group mb-4">
+                                    <label for="username">Username</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="username" name="username">
+                                            <span class="fas fa-user-circle"></span>
+                                        </span>
+                                        <input type="text" name="username" class="form-control">
+                                    </div>  
+                                    <span class="text-error" id="username_err"></span>
+                                </div>
+
+                                <!-- Form -->
+                                <div class="form-group mb-4">
+                                    <label for="usermail">Your Email</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="usermail" name="usermail">
+                                            <span class="fas fa-envelope"></span>
+                                        </span>
+                                        <input type="email" name="usermail" class="form-control" required>
+                                    </div>  
+                                    <span class="text-error" id="usermail_err"></span>
+                                </div>
+                                <!-- End of Form -->
+                                <div class="form-group">
+                                    
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="password">Your Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="userpass" name="userpass">
+                                                <span class="fas fa-unlock-alt"></span>
+                                            </span>
+                                            <input type="password" name="userpass" class="form-control" required>
+                                        </div>  
+                                        <span class="text-error" id="userpass_err"></span>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="userpass_confirm">Password Confirmation</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="userpass_confirm" name="userpass_confirm">
+                                                <span class="fas fa-unlock-alt"></span>
+                                            </span>
+                                            <input type="password" name="userpass_confirm" class="form-control" required>
+                                        </div>  
+                                        <span class="text-error"></span>
+                                    </div>
+
+                                    <!-- End of Form -->
+                                    <div class="mb-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="remember">
+                                            <label class="form-check-label fw-normal mb-0" for="remember">
+                                                I agree to the <a href="#" class="fw-bold">terms and conditions</a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="button" id="register_btn" class="btn btn-gray-800">Sign UP</button>
+                                </div>
+                            </form>
+                            <br />
+
+                            <div class="d-flex justify-content-center align-items-center">
+                                <span class="fw-normal">
+                                    Already have an account? 
+                                    <a href="{% url 'signin' %}" class="fw-bold">Sign IN</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+$(document).ready(function() {
+    $("#register_btn").on('click', function() {
+        var username = $("input[name=username]").val()
+        var usermail = $("input[name=usermail]").val()
+        var userpass = $("input[name=userpass]").val()
+        var userpass_confirm = $("input[name=userpass_confirm]").val()
+
+        if (username === '') {
+            $('#username_err').html("Username is required.")
+            return
+        }
+
+        if (usermail === '') {
+            $('#usermail_err').html("Email is required.")
+            return
+        }
+
+        if (userpass === '') {
+            $('#userpass_err').html("Password is required.")
+            return
+        }
+
+        if (userpass !== userpass_confirm) {
+            $("#msgbox").html("Password should be matched!");
+            return;
+        }
+
+        var url = "/register/"
+        var data = {
+            'username': username,
+            'usermail': usermail,
+            'userpass': userpass,
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+        }
+        $.post(url, data, function(res) {
+            var status = res.status;
+            if (status == 'ok') {
+                var url = "{% url 'home' %}"
+                location.href = url
+            } else if (status = 'duplicated') {
+                $("#msgbox").html("Email already exist!");
+            }
+        })
+    })
+})
+</script>
+{% endblock javascripts %}
