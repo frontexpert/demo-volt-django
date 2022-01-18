@@ -80,12 +80,21 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'volt',
+    #     'USER': 'root', 
+    #     'PASSWORD': '',
+    #     'HOST': 'localhost',
+    #     'PORT': '3306',
+    # }
+
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'volt',
-        'USER': 'root', 
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'NAME': 'dzjq9t85dqv8kckj',
+        'USER': 'otp2j74kv3w9g03y',
+        'PASSWORD': 'ow5vd8s2bue9y9xt',
+        'HOST': 'x8autxobia7sgh74.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
