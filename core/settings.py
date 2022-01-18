@@ -23,9 +23,9 @@ CSRF_TRUSTED_ORIGINS = ['http://localhost:85', 'http://127.0.0.1', 'https://' + 
 
 # This SMTP config is given from the client directly. Never change it.
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtpout.secureserver.net'
-EMAIL_HOST_USER = 'support@booctep.com'
-EMAIL_HOST_PASSWORD = 'Booctep1011'
+EMAIL_HOST = 'a2plcpnl0755.prod.iad2.secureserver.net'
+EMAIL_HOST_USER = 'testing001@grupoinmobiliariosanisidro.com'
+EMAIL_HOST_PASSWORD = 'vH6TKT6VDbJFfu7qPtMW'
 EMAIL_USE_TLS = False
 EMAIL_PORT = 465
 EMAIL_USE_SSL=True
@@ -80,12 +80,20 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'volt',
+    #     'USER': 'root', 
+    #     'PASSWORD': '',
+    #     'HOST': 'localhost',
+    #     'PORT': '3306',
+    # }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'volt',
-        'USER': 'root', 
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'NAME': 'dzjq9t85dqv8kckj',
+        'USER': 'otp2j74kv3w9g03y',
+        'PASSWORD': 'ow5vd8s2bue9y9xt',
+        'HOST': 'x8autxobia7sgh74.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
